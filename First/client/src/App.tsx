@@ -1,5 +1,6 @@
 
-import  { useState } from "react";
+import { useState } from "react";
+import { FaTrash } from "react-icons/fa";
 interface Task {
   name: string;
   completed: boolean;
@@ -20,6 +21,12 @@ function App() {
     const x = [...tasks, { name: newTask, completed: false }];
     setTasks(x);
     setNewTask("");
+  }
+
+  function deleteTask(task: Task) {
+    
+    const x = tasks.filter((t) => t !== task);
+    setTasks(x);
   }
   return (
     <div className="bg-red-100 h-[100vh] flex flex-col items-center justify-center">
@@ -49,6 +56,9 @@ function App() {
             <li key={index} className="flex items-center">
               <input type="checkbox" />
               <span className="text-lg ml-3">{task.name}</span>
+              <button  className="ml-4" onClick={()=>deleteTask(task)}>
+                <FaTrash />
+              </button>
             </li>
           ))}
         </ul>
